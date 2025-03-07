@@ -1,8 +1,6 @@
 import { jsPDF } from "jspdf";
-import * as html2canvas from "html2canvas";
 import { objType, createElement, cloneNode, toPx } from "./utils.js";
-import es6promise from "es6-promise";
-var Promise = es6promise.Promise;
+import { toCanvas as htmltoimage_toCanvas } from "html-to-image";
 
 /* ----- CONSTRUCTOR ----- */
 
@@ -178,7 +176,9 @@ Worker.prototype.toCanvas = function toCanvas() {
       var options = Object.assign({}, this.opt.html2canvas);
       delete options.onrendered;
 
-      return html2canvas(this.prop.container, options);
+      return htmltoimage_toCanvas(this.prop.container, {
+        pixelRatio: options.scale,
+      });
     })
     .then(function toCanvas_post(canvas) {
       // Handle old-fashioned 'onrendered' argument.
