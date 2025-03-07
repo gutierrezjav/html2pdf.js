@@ -1,14 +1,14 @@
-import Worker from './worker.js';
-import './plugin/jspdf-plugin.js';
-import './plugin/pagebreaks.js';
-import './plugin/hyperlinks.js';
+import Worker from "./worker.js";
+import "./plugin/jspdf-plugin.js";
+import "./plugin/pagebreaks.js";
+import "./plugin/hyperlinks.js";
 
 /**
- * Generate a PDF from an HTML element or string using html2canvas and jsPDF.
+ * Generate a PDF from an HTML element or string using html-to-image and jsPDF.
  *
  * @param {Element|string} source The source element or HTML string.
  * @param {Object=} opt An object of optional settings: 'margin', 'filename',
- *    'image' ('type' and 'quality'), and 'html2canvas' / 'jspdf', which are
+ *    'image' ('type' and 'quality'), and 'html-to-image' / 'jspdf', which are
  *    sent as settings to their corresponding functions.
  */
 var html2pdf = function html2pdf(src, opt) {
@@ -22,7 +22,7 @@ var html2pdf = function html2pdf(src, opt) {
     // Otherwise, return the worker for new Promise-based operation.
     return worker;
   }
-}
+};
 html2pdf.Worker = Worker;
 
 // Expose the html2pdf function.

@@ -1,16 +1,17 @@
-const path = require('path');
-const webpack = require('webpack');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-const pkg = require('./package.json');
+const path = require("path");
+const webpack = require("webpack");
+const BundleAnalyzerPlugin =
+  require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
+const pkg = require("./package.json");
 
-const externals = [ 'jspdf', 'html2canvas' ];
+const externals = ["jspdf"];
 const banner = `${pkg.name} v${pkg.version}
-Copyright (c) ${(new Date).getFullYear()} Erik Koopmans
+Copyright (c) ${new Date().getFullYear()} Erik Koopmans
 Released under the ${pkg.license} License.`;
 
-module.exports = env => {
+module.exports = (env) => {
   const isDev = env.dev;
-  const mode = isDev ? 'production' : 'development';
+  const mode = isDev ? "production" : "development";
   const watch = isDev;
   const useAnalyzer = env.analyzer;
 
@@ -18,35 +19,40 @@ module.exports = env => {
     output: {
       filename,
       library: {
-        name: 'html2pdf',
-        type: 'umd',
-        export: 'default',
+        name: "html2pdf",
+        type: "umd",
+        export: "default",
         umdNamedDefine: true,
-      }
+      },
     },
-    target: 'browserslist',
+    target: "browserslist",
     externals: bundle ? [] : externals,
-    externalsType: 'umd',
+    externalsType: "umd",
     optimization: { minimize: min },
-    devtool: min ? 'source-map' : false,
+    devtool: min ? "source-map" : false,
     bundleAnalyzer: {
-      analyzerMode: useAnalyzer ? 'server' : 'disabled',
-      analyzerPort: 'auto',
-      defaultSizes: 'stat',
+      analyzerMode: useAnalyzer ? "server" : "disabled",
+      analyzerPort: "auto",
+      defaultSizes: "stat",
     },
   });
 
   const builds = {
-    umd: makeUMDConfig('html2pdf.js'),
-    umdBundle: makeUMDConfig('html2pdf.bundle.js', { bundle: true }),
-    ...(isDev ? {} : {
-      umdMin: makeUMDConfig('html2pdf.min.js', { min: true }),
-      umdBundleMin: makeUMDConfig('html2pdf.bundle.min.js', { bundle: true, min: true }),
-    }),
+    umd: makeUMDConfig("html2pdf.js"),
+    umdBundle: makeUMDConfig("html2pdf.bundle.js", { bundle: true }),
+    ...(isDev
+      ? {}
+      : {
+          umdMin: makeUMDConfig("html2pdf.min.js", { min: true }),
+          umdBundleMin: makeUMDConfig("html2pdf.bundle.min.js", {
+            bundle: true,
+            min: true,
+          }),
+        }),
   };
 
-  return Object.values(builds).map(build => ({
-    entry: './src/index.js',
+  return Object.values(builds).map((build) => ({
+    entry: "./src/index.js",
     mode,
     target: build.target,
     watch,
@@ -54,7 +60,7 @@ module.exports = env => {
       ignored: /node_modules/,
     },
     output: {
-      path: path.resolve(__dirname, 'dist'),
+      path: path.resolve(__dirname, "dist"),
       chunkFormat: false,
       ...build.output,
     },
@@ -66,7 +72,9 @@ module.exports = env => {
     plugins: [
       new webpack.optimize.LimitChunkCountPlugin({ maxChunks: 1 }),
       new webpack.BannerPlugin(banner),
-      new BundleAnalyzerPlugin(build.bundleAnalyzer || { analyzerMode: 'disabled' }),
+      new BundleAnalyzerPlugin(
+        build.bundleAnalyzer || { analyzerMode: "disabled" }
+      ),
     ],
     experiments: build.experiments,
     module: {
@@ -74,7 +82,7 @@ module.exports = env => {
         {
           test: /\.m?js$/,
           exclude: /node_modules/,
-          use: ['babel-loader'],
+          use: ["babel-loader"],
         },
       ],
     },
