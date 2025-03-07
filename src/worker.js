@@ -135,7 +135,6 @@ Worker.prototype.toContainer = function toContainer() {
       right: 0,
       top: 0,
       height: "auto",
-      margin: "auto",
       backgroundColor: "white",
     };
 

@@ -29585,7 +29585,7 @@ Worker.template = {
       quality: 0.95
     },
     enableLinks: true,
-    html2canvas: {},
+    htmltoimage: {},
     jsPDF: {}
   }
 };
@@ -29670,7 +29670,6 @@ Worker.prototype.toContainer = function toContainer() {
       right: 0,
       top: 0,
       height: "auto",
-      margin: "auto",
       backgroundColor: "white"
     };
 
@@ -29678,7 +29677,7 @@ Worker.prototype.toContainer = function toContainer() {
     overlayCSS.opacity = 0;
 
     // Create and attach the elements.
-    var source = (0,_utils_js__WEBPACK_IMPORTED_MODULE_14__.cloneNode)(this.prop.src, this.opt.html2canvas.javascriptEnabled);
+    var source = (0,_utils_js__WEBPACK_IMPORTED_MODULE_14__.cloneNode)(this.prop.src, this.opt.htmltoimage.javascriptEnabled);
     this.prop.overlay = (0,_utils_js__WEBPACK_IMPORTED_MODULE_14__.createElement)("div", {
       className: "html2pdf__overlay",
       style: overlayCSS
@@ -29701,15 +29700,11 @@ Worker.prototype.toCanvas = function toCanvas() {
   // Fulfill prereqs then create the canvas.
   return this.thenList(prereqs).then(function toCanvas_main() {
     // Handle old-fashioned 'onrendered' argument.
-    var options = Object.assign({}, this.opt.html2canvas);
-    delete options.onrendered;
+    var options = Object.assign({}, this.opt.htmltoimage);
     return (0,html_to_image__WEBPACK_IMPORTED_MODULE_15__.toCanvas)(this.prop.container, {
       pixelRatio: options.scale
     });
   }).then(function toCanvas_post(canvas) {
-    // Handle old-fashioned 'onrendered' argument.
-    var onRendered = this.opt.html2canvas.onrendered || function () {};
-    onRendered(canvas);
     this.prop.canvas = canvas;
     document.body.removeChild(this.prop.overlay);
   });
@@ -30150,11 +30145,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /**
- * Generate a PDF from an HTML element or string using html2canvas and jsPDF.
+ * Generate a PDF from an HTML element or string using html-to-image and jsPDF.
  *
  * @param {Element|string} source The source element or HTML string.
  * @param {Object=} opt An object of optional settings: 'margin', 'filename',
- *    'image' ('type' and 'quality'), and 'html2canvas' / 'jspdf', which are
+ *    'image' ('type' and 'quality'), and 'html-to-image' / 'jspdf', which are
  *    sent as settings to their corresponding functions.
  */
 var html2pdf = function html2pdf(src, opt) {
