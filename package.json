@@ -7,7 +7,7 @@
     "/src",
     "/dist"
   ],
-  "repository": "git@github.com:eKoopmans/html2pdf.js.git",
+  "repository": "git@github.com:gutierrezjav/html2pdf.js.git",
   "keywords": [
     "javascript",
     "pdf-generation",
@@ -16,15 +16,13 @@
     "canvas"
   ],
   "author": {
-    "name": "Erik Koopmans",
-    "email": "erik@erik-koopmans.com",
-    "url": "https://www.erik-koopmans.com"
+    "name": "Javier Gutierrez",
+    "email": "j.gtrez@gmail.com"
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/eKoopmans/html2pdf.js/issues"
+    "url": "https://github.com/gutierrezjav/html2pdf.js/issues"
   },
-  "homepage": "https://ekoopmans.github.io/html2pdf.js/",
   "dependencies": {
     "html-to-image": "^1.11.13",
     "jspdf": "^3.0.0"
