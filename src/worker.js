@@ -174,9 +174,7 @@ Worker.prototype.toCanvas = function toCanvas() {
       // Handle old-fashioned 'onrendered' argument.
       var options = Object.assign({}, this.opt.htmltoimage);
 
-      return htmltoimage_toCanvas(this.prop.container, {
-        pixelRatio: options.scale,
-      });
+      return htmltoimage_toCanvas(this.prop.container, options);
     })
     .then(function toCanvas_post(canvas) {
       this.prop.canvas = canvas;

@@ -8112,9 +8112,7 @@ Worker.prototype.toCanvas = function toCanvas() {
   return this.thenList(prereqs).then(function toCanvas_main() {
     // Handle old-fashioned 'onrendered' argument.
     var options = Object.assign({}, this.opt.htmltoimage);
-    return (0,html_to_image__WEBPACK_IMPORTED_MODULE_15__.toCanvas)(this.prop.container, {
-      pixelRatio: options.scale
-    });
+    return (0,html_to_image__WEBPACK_IMPORTED_MODULE_15__.toCanvas)(this.prop.container, options);
   }).then(function toCanvas_post(canvas) {
     this.prop.canvas = canvas;
     document.body.removeChild(this.prop.overlay);
